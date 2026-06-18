@@ -25,13 +25,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Grant Execute Permission to Gradlew
-        run: chmod +x gradlew
-
-      - name: Download fresh Gradle Wrapper JAR
+      - name: Clean and Regenerate Gradle Wrapper
         run: |
-          mkdir -p gradle/wrapper
-          curl -Lo gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.7.0/gradle/wrapper/gradle-wrapper.jar
+          rm -f gradle/wrapper/gradle-wrapper.jar
+          gradle wrapper --gradle-version 8.7
+          chmod +x gradlew
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug
