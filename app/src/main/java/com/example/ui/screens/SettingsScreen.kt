@@ -48,8 +48,8 @@ fun SettingsScreen(viewModel: PulseViewModel) {
     val titleColor = if (isLight) Color(0xFF1F2937) else Color.White
 
     // Notifications toggle slots
-    var notifUrgente by remember { mutableStateOf(true) }
-    var notifPomComplete by remember { mutableStateOf(true) }
+    var notifUrgente by viewModel.notifUrgente
+    var notifPomComplete by viewModel.notifPomComplete
     var notifRemindToday by remember { mutableStateOf(true) }
 
     var showWipeConfirm by remember { mutableStateOf(false) }

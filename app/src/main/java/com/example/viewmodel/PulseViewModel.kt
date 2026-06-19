@@ -49,6 +49,8 @@ class PulseViewModel(application: Application) : AndroidViewModel(application) {
     var appTheme = mutableStateOf(PulseTheme.DARK)
     var accentColor = mutableStateOf(PulseAccentColor.VIOLET)
     var language = mutableStateOf("FR") // "FR" or "EN"
+    var notifUrgente = mutableStateOf(true)
+    var notifPomComplete = mutableStateOf(true)
 
     // Custom Durations (in minutes)
     var focusDuration = mutableStateOf(25)
@@ -218,7 +220,13 @@ class PulseViewModel(application: Application) : AndroidViewModel(application) {
             else -> if (language.value == "FR") "Prêt pour relever de nouveaux défis ?" else "Ready to tackle your goals?"
         }
 
+        // Send push notification
         notificationHelper.sendNotification(modeText, detailText)
+
+        // Play alarm sound and vibrate device if enabled in Settings
+        if (notifPomComplete.value) {
+            notificationHelper.playAlarmFeedback(vibrate = true, playSound = true)
+        }
 
         // Save session if in focus mode
         if (_currentTimerMode.value == "focus") {
@@ -279,6 +287,8 @@ class PulseViewModel(application: Application) : AndroidViewModel(application) {
             // resets
             userName.value = "Michael"
             userAvatar.value = "⚡"
+            notifUrgente.value = true
+            notifPomComplete.value = true
             appTheme.value = PulseTheme.DARK
             accentColor.value = PulseAccentColor.VIOLET
             focusDuration.value = 25

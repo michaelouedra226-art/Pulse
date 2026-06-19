@@ -1,5 +1,5 @@
 {
-  "name": "Todo",
+  "name": "Pulse",
   "description": "Personal Productivity OS — Ton système de vie personnel premium.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
